@@ -38,11 +38,37 @@ game = True
 finish = False
 clock = time.Clock()
 
+racket1 = Player('rect.png', 30, 200, 4, 50, 150)
+racket2 = Player('rect.png', 520, 200, 4, 50, 150)
+ball = GameSprite('tennis.png', 200, 200, 4, 50, 50)
+
+font.init()
+font = font.Font(None, 50)
+lose1 = font.render('PLAYER 1 LOSE!', True, (180,0,0))
+lose2 = font.render('PLAYER 2 LOSE!', True, (180,0,0))
+
+speed_x = 3
+speed_y = 3
+
 while game:
     for e in event.get():
         if e.type == QUIT:
             game = False
     
+    if finish != True:
+        window.fill(background)
+        racket1.update_l()
+        racket2.update_r()
+        ball.rect.x += speed_x
+        ball.rect.y += speed_y
+
+
+        racket1.reset()
+        racket2.reset()
+        ball.reset()
+    
+    display.update()
+    clock.tick(60)
     if finish != True:
         window.fill(background)
     
